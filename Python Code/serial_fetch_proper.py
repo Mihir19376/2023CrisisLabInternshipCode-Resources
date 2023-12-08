@@ -16,6 +16,13 @@ if __name__ == '__main__':
     ser = serial.Serial('COM11', 9600, timeout=1)
     ser.reset_output_buffer()
     counter = 0
+    
+    ser.flushInput()
+    command = input("Enter your command: ")
+    if command:
+        command += "\r\n"
+        ser.write(command.encode())
+
     while(True):
         v = ser.readline().decode('utf-8').rstrip()
         if len(v) > 0:

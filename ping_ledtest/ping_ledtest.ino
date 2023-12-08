@@ -11,8 +11,12 @@
 RH_RF95 rf95(RF95_CS, RF95_INT);
 uint8_t data[RH_RF95_MAX_MESSAGE_LEN];
 
+bool sending = false;
+String clientId = "Client #1";
+
 void setup()
 {
+  sending = false;
   Serial.begin(9600);
   pinMode(RF95_RST, OUTPUT);
   digitalWrite(RF95_RST, HIGH);
@@ -48,32 +52,55 @@ void blinkLED(){
 }
 
 void loop(){
-  //sjdfjsdhfsdafh
-  if(Serial.available() > 0){
-    delay(100);
-    String data = Serial.readString();
-    Serial.println(data);
+  // if this device recives the request for-
+  // -"Client #1", then it will run all the following code:
 
-    char msg[300];
-    data.toCharArray(msg, data.length() + 1);
-
-    while (true){
-      digitalWrite(LED, HIGH);
-      rf95.send(msg, strlen(msg));
-      rf95.waitPacketSent();
-
-      if (!rf95.waitAvailableTimeout(10000)){
-        blinkLED();
-        return;
-      }
-      uint8_t len  = sizeof(msg);
-      if (!rf95.recv(msg, &len)){
-        blinkLED();
-        return;
-      }
-
-      break;
+  if (!sending){
+    if (!rf95.available()){
+      return;
     }
+    uint8_t len  = sizeof(data);
+    if (!rf95.recv(data, &len)){
+      return;
+    }
+
+    String recievedMessage = (char*)data;
+
+    recievedMessage.trim();
+    Serial.println(recievedMessage);
+
+    if (recievedMessage == clientId){
+      sending = true;
+      Serial.println("svrscscsr");
+    }
+  }
+  else{
+    if(Serial.available() > 0){
+      delay(100);
+      String data = Serial.readString();
+      Serial.println(data);
+
+      char msg[300];
+      data.toCharArray(msg, data.length() + 1);
+
+      while (true){
+        digitalWrite(LED, HIGH);
+        rf95.send(msg, strlen(msg));
+        rf95.waitPacketSent();
+
+        if (!rf95.waitAvailableTimeout(10000)){
+          blinkLED();
+          return;
+        }
+        uint8_t len  = sizeof(msg);
+        if (!rf95.recv(msg, &len)){
+          blinkLED();
+          return;
+        }
+
+        break;
+      }
+    }   
   }
   
 }
