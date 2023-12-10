@@ -79,6 +79,7 @@ void loop(){
   }
   else{
     if(Serial.available() > 0){
+      timeOut = 0;
       delay(100);
       String data = Serial.readString();
       Serial.println(data);
