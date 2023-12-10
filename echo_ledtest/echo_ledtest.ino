@@ -27,7 +27,7 @@ void setup()
   rf95.init();
   rf95.setFrequency(RF95_FREQ);
   rf95.setTxPower(23);
-  rf95.setModemConfig(RH_RF95::ModemConfigChoice::Bw31_25Cr48Sf512);
+  // rf95.setModemConfig(RH_RF95::ModemConfigChoice::Bw31_25Cr48Sf512);
 }
 
 void loop(){

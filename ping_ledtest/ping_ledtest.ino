@@ -13,9 +13,11 @@ uint8_t data[RH_RF95_MAX_MESSAGE_LEN];
 
 bool sending = false;
 String clientId = "Client #1";
+int timeOut = 0;
 
 void setup()
 {
+  timeOut = 0;
   sending = false;
   Serial.begin(9600);
   pinMode(RF95_RST, OUTPUT);
@@ -68,10 +70,11 @@ void loop(){
 
     recievedMessage.trim();
     Serial.println(recievedMessage);
+    Serial.println(recievedMessage == clientId);
 
     if (recievedMessage == clientId){
       sending = true;
-      Serial.println("svrscscsr");
+      Serial.println("Connected Established");
     }
   }
   else{
@@ -100,7 +103,16 @@ void loop(){
 
         break;
       }
-    }   
+    }else{
+      timeOut += 1;
+      delay(1);
+      if (timeOut > 10000){
+        sending = false; 
+        timeOut = 0;
+        Serial.println("Time Out");
+      }
+      return;
+    }
   }
   
 }
