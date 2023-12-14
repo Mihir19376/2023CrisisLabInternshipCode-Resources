@@ -74,7 +74,7 @@ void loop(){
 
     if (recievedMessage == clientId){
       sending = true;
-      Serial.println("Connected Established");
+      Serial.println("Connection Established");
     }
   }
   else{
