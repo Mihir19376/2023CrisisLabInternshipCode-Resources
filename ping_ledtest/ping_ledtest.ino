@@ -1,5 +1,4 @@
-
-// Programme TWO - PING
+// Programme TWO - PING - Client
 #include <RH_RF95.h>
 #define RF95_CS 10
 #define RF95_INT 2
@@ -30,14 +29,6 @@ void setup()
   rf95.init();
   rf95.setFrequency(RF95_FREQ);
   rf95.setTxPower(23);
-  // rf95.setModemConfig(RH_RF95::ModemConfigChoice::Bw31_25Cr48Sf512);
-
-  // RH_RF95::ModemConfig modem_config = {
-  //   0x78, // Reg 0x1D: BW=125kHz, Coding=4/8, Header=explicit
-  //   0xc4, // Reg 0x1E: Spread=4096chips/symbol, CRC=enable
-  //   0x0c  // Reg 0x26: LowDataRate=On, Agc=On
-  // };
-  // rf95.setModemRegisters(&modem_config);
 }
 
 void blinkLED(){

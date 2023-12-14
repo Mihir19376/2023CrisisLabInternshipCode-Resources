@@ -1,5 +1,4 @@
-
-// Programme ONE - ECHO
+// Programme ONE - ECHO - Server
 #include <RH_RF95.h>
 #define RF95_CS 10
 #define RF95_INT 2
