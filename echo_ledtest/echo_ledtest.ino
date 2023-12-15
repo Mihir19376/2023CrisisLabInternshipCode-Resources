@@ -48,7 +48,6 @@ void loop(){
       return;
     }
 
-    // Serial.print("got request: ");
     Serial.println((char*)data);
     rf95.send(data, len);
     rf95.waitPacketSent();
