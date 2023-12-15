@@ -12,3 +12,5 @@ Instructions:
 Establish a connection with a client by inputting the client address into the serial monitor, and then run the ArduinoTo Files python program, and wait for all the data to be received and stored in text files on your device. Once this is over, wait a moment before you decide to establish and draw data from other client addresses.
 
 Here is the link to all the python code required to run this: https://github.com/rs-Web-Interface-CRISiSLab/shake-to-lora
+
+The python file on this repository is a copy of one in the repository linked above. I have added it here as well for convinience as this file must be run on the engineer's laptop when you want to capture the data. 
